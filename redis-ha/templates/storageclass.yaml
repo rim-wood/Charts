@@ -1,0 +1,12 @@
+{{- if and .Values.persistentVolume.enabled (not .Values.persistentVolume.existingClaim) -}}
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+   name: {{ .Values.persistentVolume.storageClass }}
+provisioner: 
+{{ toYaml .Values.persistentVolume.provisioner | indent 2 }}
+parameters:
+{{ toYaml .Values.persistentVolume.classParameters | indent 2 }}
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+{{- end }}
