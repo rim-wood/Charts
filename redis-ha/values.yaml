@@ -194,7 +194,7 @@ persistentVolume:
   ##   GKE, AWS & OpenStack)
   ##
   storageClass: "redis-ha-sc"
-  provisioner: fuseim.pri/ifs
+  provisioner: icepear.cn/ifs
   classParameters: {}
   accessModes:
     - ReadWriteOnce
@@ -214,3 +214,12 @@ hostPath:
   # change the owner of the hostPath folder to the user defined in the
   # security context
   chown: true
+
+ingress:
+  enabled: true
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: redis.dev.icepear.cn
+      paths: ['/']
